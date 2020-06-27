@@ -8,6 +8,6 @@ namespace LaundryBaaz.Interfaces
 {
     public interface ILaundryRepository
     {
-        Task SignUpDetails(Profile profile);
+        Task<bool> SignUpDetails(Profile profile);
     }
 }
