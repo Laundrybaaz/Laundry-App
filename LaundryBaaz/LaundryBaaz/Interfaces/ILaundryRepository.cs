@@ -9,5 +9,6 @@ namespace LaundryBaaz.Interfaces
     public interface ILaundryRepository
     {
         Task<bool> SignUpDetails(Profile profile);
+        Task<bool> Submit(ClothInfo clothInfo);
     }
 }

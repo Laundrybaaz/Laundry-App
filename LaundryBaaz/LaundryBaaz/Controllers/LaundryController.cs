@@ -33,10 +33,17 @@ namespace LaundryBaaz.Controllers
         }
 
         // POST api/laundry
-        [HttpPost]
-        public ActionResult<bool> Post([FromBody] Profile profile)
+        [HttpPost("[action]")]
+        public ActionResult<bool> SignUp([FromBody] Profile profile)
         {
             var result = _laundryRepository.SignUpDetails(profile);
+            return result.Result;
+        }
+
+        [HttpPost("[action]")]
+        public ActionResult<bool> Submit([FromBody] ClothInfo clothInfo)
+        {
+            var result = _laundryRepository.Submit(clothInfo);
             return result.Result;
         }
 

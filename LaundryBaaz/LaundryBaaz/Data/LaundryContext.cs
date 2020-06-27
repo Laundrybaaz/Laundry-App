@@ -19,11 +19,19 @@ namespace LaundryBaaz.Data
                 _database = client.GetDatabase(settings.Value.Database);
         }
 
-        public IMongoCollection<Profile> SignUpDetails
+        public IMongoCollection<Profile> GetProfiles
         {
             get
             {
                 return _database.GetCollection<Profile>("Profile");
+            }
+        }
+
+        public IMongoCollection<ClothInfo> ClothInfo
+        {
+            get
+            {
+                return _database.GetCollection<ClothInfo>("Clothes");
             }
         }
     }

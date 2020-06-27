@@ -57,8 +57,12 @@ namespace LaundryBaaz
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();           
-           
+            app.UseMvc(routes =>
+            {
+                routes
+                    .MapRoute(name: "default", template: "{controller=laundry}/{action=Index}/{id?}")
+                    .MapRoute(name: "api", template: "api/{controller}/{action}/{id?}");
+            });
         }
     }
 }

@@ -23,15 +23,31 @@ namespace LaundryBaaz.Data
             try
             {
 
-                if (_context.SignUpDetails.Find(x => x.Email == profile.Email).FirstOrDefaultAsync().Result==null)
+                if (_context.GetProfiles.Find(x => x.Email == profile.Email).FirstOrDefaultAsync().Result==null)
                 {
-                    _context.SignUpDetails.InsertOneAsync(profile);
+                    _context.GetProfiles.InsertOneAsync(profile);
                     return Task.FromResult(true);
                 }
                 else
                 {
                     return Task.FromResult(false);
                 }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public Task<bool> Submit(ClothInfo clothInfo)
+        {
+            try
+            {
+
+                _context.ClothInfo.InsertOneAsync(clothInfo);
+                return Task.FromResult(true);
 
             }
             catch (Exception ex)
