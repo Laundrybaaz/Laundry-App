@@ -19,10 +19,10 @@ namespace LaundryBaaz.Controllers
             _laundryRepository = laundryRepository;
         }
         // GET api/laundry
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [HttpGet("GetAvailability")]
+        public long Get(string email, string password)
         {
-            return new string[] { "value1", "value2" };
+            return _laundryRepository.GetAvailability(email, password);
         }
 
         // GET api/laundry/5

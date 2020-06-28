@@ -26,5 +26,8 @@ namespace LaundryBaaz.Data
                 return _database.GetCollection<Profile>("Profile");
             }
         }
+
+
+        
     }
 }

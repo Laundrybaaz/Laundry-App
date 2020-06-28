@@ -1,6 +1,8 @@
 ﻿using LaundryBaaz.Interfaces;
 using LaundryBaaz.Models;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,5 +31,15 @@ namespace LaundryBaaz.Data
                 throw ex;
             }
         }
+
+        public long GetAvailability(string email, string password)
+            {
+
+            var profiles = _context.SignUpDetails;
+
+            var filters = Builders<Profile>.Filter.Where(k => k.Email == email && k.Password == password);
+
+            return profiles.Find(filters).CountDocuments();
+            }
     }
 }
