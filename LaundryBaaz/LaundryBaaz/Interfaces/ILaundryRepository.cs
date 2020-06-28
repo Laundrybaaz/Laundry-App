@@ -8,8 +8,9 @@ namespace LaundryBaaz.Interfaces
 {
     public interface ILaundryRepository
     {
-        Task SignUpDetails(Profile profile);
-
+        
         bool GetAvailability(string email, string password);
+        Task<bool> SignUpDetails(Profile profile);
+
     }
 }
