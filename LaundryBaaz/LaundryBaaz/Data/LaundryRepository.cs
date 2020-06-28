@@ -19,11 +19,21 @@ namespace LaundryBaaz.Data
             _context = new LaundryContext(settings);
         }
 
-        public Task SignUpDetails(Profile profile)
+        public Task<bool> SignUpDetails(Profile profile)
         {
             try
             {
-                return _context.SignUpDetails.InsertOneAsync(profile);
+
+                if (_context.SignUpDetails.Find(x => x.Email == profile.Email).FirstOrDefaultAsync().Result==null)
+                {
+                    _context.SignUpDetails.InsertOneAsync(profile);
+                    return Task.FromResult(true);
+                }
+                else
+                {
+                    return Task.FromResult(false);
+                }
+
             }
             catch (Exception ex)
             {
