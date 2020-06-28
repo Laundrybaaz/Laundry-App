@@ -10,6 +10,6 @@ namespace LaundryBaaz.Interfaces
     {
         Task SignUpDetails(Profile profile);
 
-        long GetAvailability(string email, string password);
+        bool GetAvailability(string email, string password);
     }
 }

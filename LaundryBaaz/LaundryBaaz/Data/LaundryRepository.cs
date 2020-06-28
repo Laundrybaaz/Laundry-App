@@ -32,14 +32,12 @@ namespace LaundryBaaz.Data
             }
         }
 
-        public long GetAvailability(string email, string password)
+        public bool GetAvailability(string email, string password)
             {
 
-            var profiles = _context.SignUpDetails;
-
-            var filters = Builders<Profile>.Filter.Where(k => k.Email == email && k.Password == password);
-
-            return profiles.Find(filters).CountDocuments();
+                return _context.SignUpDetails.
+                       Find(k => k.Email == email && k.Password == password).
+                       CountDocuments() != 0?true: false;
             }
     }
 }
