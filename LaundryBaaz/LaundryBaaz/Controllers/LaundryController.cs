@@ -20,9 +20,9 @@ namespace LaundryBaaz.Controllers
         }
         // GET api/laundry
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public int Get()
         {
-            return new string[] { "value1", "value2" };
+            return _laundryRepository.getLatestOrderId();
         }
 
         // GET api/laundry/5

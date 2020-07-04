@@ -34,5 +34,14 @@ namespace LaundryBaaz.Data
                 return _database.GetCollection<ClothInfo>("Clothes");
             }
         }
+
+        public IMongoCollection<OrderId> GetLatestOrderIdForClothInfo
+            {
+
+            get
+                {
+                return _database.GetCollection<OrderId>("LatestOrderId");
+                }
+            }
     }
 }

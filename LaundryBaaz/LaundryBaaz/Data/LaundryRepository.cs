@@ -1,6 +1,7 @@
 ﻿using LaundryBaaz.Interfaces;
 using LaundryBaaz.Models;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,10 @@ namespace LaundryBaaz.Data
         public LaundryRepository(IOptions<Settings> settings)
         {
             _context = new LaundryContext(settings);
+            
         }
 
+       
         public Task<bool> SignUpDetails(Profile profile)
         {
             try
@@ -45,8 +48,12 @@ namespace LaundryBaaz.Data
         {
             try
             {
-
+                clothInfo.orderId = getLatestOrderId() + 1;
                 _context.ClothInfo.InsertOneAsync(clothInfo);
+                _context.GetLatestOrderIdForClothInfo.UpdateOne(
+                    Builders<OrderId>.Filter.Eq("orderId", getLatestOrderId()),
+                    Builders<OrderId>.Update.Set("orderId", clothInfo.orderId)
+                    );
                 return Task.FromResult(true);
 
             }
@@ -56,5 +63,10 @@ namespace LaundryBaaz.Data
                 throw ex;
             }
         }
+
+        public int getLatestOrderId()
+            {
+            return _context.GetLatestOrderIdForClothInfo.AsQueryable().First().orderId;
+            }
     }
 }
