@@ -35,13 +35,6 @@ namespace LaundryBaaz.Data
             }
         }
 
-        public IMongoCollection<OrderId> GetLatestOrderIdForClothInfo
-            {
-
-            get
-                {
-                return _database.GetCollection<OrderId>("LatestOrderId");
-                }
-            }
+      
     }
 }
