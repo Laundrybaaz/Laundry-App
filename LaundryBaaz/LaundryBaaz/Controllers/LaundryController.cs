@@ -25,6 +25,12 @@ namespace LaundryBaaz.Controllers
             return Ok();
         }
 
+         [HttpGet("GetAvailability")]
+        public bool Get(string email, string password)
+        {
+            return _laundryRepository.GetAvailability(email, password);
+        }
+
         // GET api/laundry/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
