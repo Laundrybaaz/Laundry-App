@@ -48,12 +48,8 @@ namespace LaundryBaaz.Data
         {
             try
             {
-                clothInfo.orderId = getLatestOrderId() + 1;
+                clothInfo.orderId = (int)_context.ClothInfo.CountDocuments(FilterDefinition<ClothInfo>.Empty) + 1;
                 _context.ClothInfo.InsertOneAsync(clothInfo);
-                _context.GetLatestOrderIdForClothInfo.UpdateOne(
-                    Builders<OrderId>.Filter.Eq("orderId", getLatestOrderId()),
-                    Builders<OrderId>.Update.Set("orderId", clothInfo.orderId)
-                    );
                 return Task.FromResult(true);
 
             }
@@ -64,9 +60,6 @@ namespace LaundryBaaz.Data
             }
         }
 
-        public int getLatestOrderId()
-            {
-            return _context.GetLatestOrderIdForClothInfo.AsQueryable().First().orderId;
-            }
+       
     }
 }

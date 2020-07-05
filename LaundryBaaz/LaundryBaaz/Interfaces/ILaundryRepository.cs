@@ -10,6 +10,6 @@ namespace LaundryBaaz.Interfaces
     {
         Task<bool> SignUpDetails(Profile profile);
         Task<bool> Submit(ClothInfo clothInfo);
-        int getLatestOrderId();
+     
     }
 }

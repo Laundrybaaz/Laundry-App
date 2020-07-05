@@ -20,9 +20,9 @@ namespace LaundryBaaz.Controllers
         }
         // GET api/laundry
         [HttpGet]
-        public int Get()
+        public ActionResult Get()
         {
-            return _laundryRepository.getLatestOrderId();
+            return Ok();
         }
 
         // GET api/laundry/5
