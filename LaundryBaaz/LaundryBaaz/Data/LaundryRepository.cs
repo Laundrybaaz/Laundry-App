@@ -60,6 +60,14 @@ namespace LaundryBaaz.Data
             }
         }
 
+         public bool GetAvailability(string email, string password)
+            {
+
+                return _context.GetProfiles.
+                       Find(k => k.Email == email && k.Password == password).
+                       CountDocuments() != 0?true: false;
+            }
+
        
     }
 }

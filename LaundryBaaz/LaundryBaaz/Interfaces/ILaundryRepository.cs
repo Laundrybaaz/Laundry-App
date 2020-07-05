@@ -10,6 +10,7 @@ namespace LaundryBaaz.Interfaces
     {
         Task<bool> SignUpDetails(Profile profile);
         Task<bool> Submit(ClothInfo clothInfo);
+        bool GetAvailability(string email, string password);
      
     }
 }
