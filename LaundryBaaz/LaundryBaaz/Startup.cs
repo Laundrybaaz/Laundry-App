@@ -32,21 +32,32 @@ namespace LaundryBaaz
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {   services.AddCors(
+                options => options.AddPolicy("AllowCors",
+                    builder => {
+                        builder.AllowAnyOrigin()
+                        .WithMethods("GET", "PUT", "POST", "DELETE")
+                        .AllowAnyHeader();
+                    }
+                )
+
+            );
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
             services.Configure<Settings>(options =>
             {
                 options.ConnectionString
                     = Configuration.GetSection("MongoConnection:ConnectionString").Value;
                 options.Database
                     = Configuration.GetSection("MongoConnection:Database").Value;
+                    
             });
             services.AddTransient<ILaundryRepository, LaundryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        {   app.UseCors("AllowCors");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -55,7 +66,6 @@ namespace LaundryBaaz
             {
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseMvc(routes =>
             {
